@@ -19,8 +19,7 @@ const Box = styled(motion.div)`
 function App() {
   return (
     <Wrapper>
-      React-Animations
-      <motion.div>hello</motion.div>
+      <Box animate={{ borderRadius: 100 }}>Box</Box>
     </Wrapper>
   );
 }
