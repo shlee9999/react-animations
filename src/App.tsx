@@ -14,12 +14,18 @@ const Box = styled(motion.div)`
   height: 200px;
   background-color: white;
   border-radius: 15px;
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1), 0 10px 20px rgba(0, 0, 0, 0.06);
+  box-shadow:
+    0 2px 3px rgba(0, 0, 0, 0.1),
+    0 10px 20px rgba(0, 0, 0, 0.06);
 `;
 function App() {
   return (
     <Wrapper>
-      <Box transition={{ type: 'spring', bounce: 0.85 }} initial={{ scale: 0 }} animate={{ scale: 1, rotateZ: 360 }} />
+      <Box
+        transition={{ type: 'spring', bounce: 0.85, duration: 2 }}
+        initial={{ scale: 0 }}
+        animate={{ scale: 1, rotateZ: 360 }}
+      />
     </Wrapper>
   );
 }
