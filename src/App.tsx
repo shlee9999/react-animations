@@ -1,43 +1,45 @@
 import styled from 'styled-components';
-import { motion, useMotionValue, useScroll, useTransform } from 'framer-motion';
-import { useEffect } from 'react';
+import { AnimatePresence, Variants, motion } from 'framer-motion';
+import { useState } from 'react';
 const Wrapper = styled(motion.div)`
-  height: 500vh;
+  height: 100vh;
   width: 100vw;
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  background: linear-gradient(135deg, #e09, #d0e);
 `;
-
 const Box = styled(motion.div)`
-  width: 200px;
-  height: 200px;
-  background-color: rgba(255, 255, 255);
-  border-radius: 15px;
+  background-color: rgba(255, 255, 255, 1);
+  width: 400px;
+  height: 400px;
+  border-radius: 40px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
   box-shadow:
     0 2px 3px rgba(0, 0, 0, 0.1),
     0 10px 20px rgba(0, 0, 0, 0.06);
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
 `;
-
+const Circle = styled(motion.div)`
+  background-color: #00a5ff;
+  height: 100px;
+  width: 100px;
+  border-radius: 50px;
+  box-shadow:
+    0 2px 3px rgba(0, 0, 0, 0.1),
+    0 10px 20px rgba(0, 0, 0, 0.06);
+`;
 function App() {
-  const x = useMotionValue(0);
-  const rotateZ = useTransform(x, [-800, 800], [-360, 360]);
-  const gradient = useTransform(
-    x,
-    [-800, 800],
-    [
-      'linear-gradient(135deg, rgb(0, 210, 238), rgb(0, 83, 238))',
-      'linear-gradient(135deg, rgb(0, 238, 155), rgb(238, 178, 0))',
-    ]
-  );
-  const { scrollYProgress } = useScroll();
-  const scale = useTransform(scrollYProgress, [0, 1], [0, 2]);
-
+  const [clicked, setClicked] = useState(false);
+  const toggleClicked = () => setClicked((prev) => !prev);
   return (
-    <Wrapper style={{ background: gradient }}>
-      <Box style={{ x, rotateZ, scale }} drag="x" dragSnapToOrigin />
+    <Wrapper>
+      <Box style={{ justifyContent: clicked ? 'center' : 'flex-start', alignItems: clicked ? 'center' : 'flex-start' }}>
+        <Circle />
+      </Box>
     </Wrapper>
   );
 }
