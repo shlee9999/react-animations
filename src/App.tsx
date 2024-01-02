@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { AnimatePresence, Variants, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { useState } from 'react';
 const Wrapper = styled(motion.div)`
   height: 100vh;
@@ -7,8 +7,8 @@ const Wrapper = styled(motion.div)`
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  gap: 10px;
+
+  gap: 200px;
   background: linear-gradient(135deg, #e09, #d0e);
 `;
 const Box = styled(motion.div)`
@@ -17,8 +17,8 @@ const Box = styled(motion.div)`
   height: 400px;
   border-radius: 40px;
   display: flex;
-  justify-content: flex-start;
-  align-items: flex-start;
+  justify-content: center;
+  align-items: center;
   box-shadow:
     0 2px 3px rgba(0, 0, 0, 0.1),
     0 10px 20px rgba(0, 0, 0, 0.06);
@@ -36,10 +36,9 @@ function App() {
   const [clicked, setClicked] = useState(false);
   const toggleClicked = () => setClicked((prev) => !prev);
   return (
-    <Wrapper>
-      <Box style={{ justifyContent: clicked ? 'center' : 'flex-start', alignItems: clicked ? 'center' : 'flex-start' }}>
-        <Circle />
-      </Box>
+    <Wrapper onClick={toggleClicked}>
+      <Box>{clicked ? <Circle layoutId="Circle" style={{ borderRadius: 50 }} /> : null}</Box>
+      <Box>{clicked ? null : <Circle layoutId="Circle" style={{ borderRadius: 0 }} />}</Box>
     </Wrapper>
   );
 }
